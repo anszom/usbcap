@@ -45,23 +45,30 @@ Capturing data from a USB mouse (by address):
 	Bus 001 Device 002: ID 046d:c077 Logitech, Inc. M105 Optical Mouse <- here 002 is the device address
 	Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 	...
-	# ./usbcap -i usbmon1 2 | tcpdump -r -
+	# ./usbcap -i usbmon1 2 | tcpdump -r - -x
 	Capturing device 2
 	Reading from file -, link-type USB_LINUX_MMAPPED (USB with padded Linux header)
 	20:34:46.632906 CONTROL SUBMIT to 1:2:0
 	20:34:46.633417 CONTROL COMPLETE from 1:2:0
+		0x0000:  1201 0002 0000 0008 6d04 77c0 0072 0102
+		0x0010:  0001
 	20:34:48.997711 INTERRUPT COMPLETE to 1:2:1
+		0x0000:  0001 0100
 	...
 
 
 By ID:
 
-	# ./usbcap -i usbmon1 046d:c077 | tcpdump -r -
+	# ./usbcap -i usbmon1 046d:c077 | tcpdump -r - -x
 	Waiting for device 046d:c077
 	Now capturing device 2
 	reading from file -, link-type USB_LINUX_MMAPPED (USB with padded Linux header)
 	20:35:10.605437 CONTROL COMPLETE from 1:2:0
+		0x0000:  1201 0002 0000 0008 6d04 77c0 0072 0102
+		0x0010:  0001
 	20:35:11.253579 INTERRUPT COMPLETE to 1:2:1
+		0x0000:  0001 0100
 	20:35:11.253607 INTERRUPT SUBMIT from 1:2:1
 	20:35:11.269558 INTERRUPT COMPLETE to 1:2:1
+		0x0000:  0001 0100
 
